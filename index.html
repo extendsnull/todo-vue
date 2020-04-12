@@ -10,18 +10,43 @@
   <h1 class="mb-3">Todo App</h1>
   <div id="app">
     <form action="#" class="form mb-3">
-      <input class="form-control mb-3" type="text" placeholder="Что нужно сделать?">
+      <label for="description" class="sr-only">Что нужно сделать?</label>
+      <input
+        id="description"
+        class="form-control mb-3"
+        type="text" placeholder="Что нужно сделать?"
+        v-model="description"
+        v-on:input="onChangeField"
+      >
       <div class="d-flex justify-content-end">
-        <button class="btn btn-danger" type="reset">Очистить</button>
-        <button class="btn btn-primary ml-3" type="submit">Добавить</button>
+        <button
+          class="btn btn-danger"
+          type="reset"
+          v-bind:disabled="!description"
+          v-on:click="resetDescriptionField"
+        >Очистить</button>
+        <button
+          class="btn btn-primary ml-3"
+          type="submit"
+          v-bind:disabled="!description"
+          v-on:click.prevent="addTodoItem"
+        >Добавить</button>
       </div>
     </form>
-    <p class="alert alert-primary">Список дел пуст.</p>
-    <p class="alert alert-info">Список дел:</p>
+    <p
+      class="alert alert-primary"
+      v-if="!todoItems.length"
+    >Список дел пуст.</p>
+    <p
+      class="alert alert-info"
+      v-else
+    >Список дел:</p>
     <ul class="list-group">
-      <li class="list-group-item">Изучить Vue.js</li>
-      <li class="list-group-item">Приготовить обед.</li>
-      <li class="list-group-item">Поиграть с кошкой.</li>
+      <li
+        class="list-group-item"
+        v-for="item in todoItems"
+        v-bind:key="item.id"
+      >{{ item.description }}</li>
     </ul>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
