@@ -9,7 +9,11 @@
 <body class="container pt-3">
   <h1 class="mb-3">Todo App</h1>
   <div id="app">
-    <form action="#" class="form mb-3">
+    <form
+      action="#"
+      class="form mb-3"
+      v-on:submit.prevent="addTodoItem"
+    >
       <label for="description" class="sr-only">Что нужно сделать?</label>
       <input
         id="description"
@@ -29,7 +33,6 @@
           class="btn btn-primary ml-3"
           type="submit"
           v-bind:disabled="!description"
-          v-on:click.prevent="addTodoItem"
         >Добавить</button>
       </div>
     </form>
